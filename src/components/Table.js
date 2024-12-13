@@ -31,15 +31,15 @@ const Table = () => {
       pagination: 'local',
       paginationSize: 20,
       columns: [
-        { title: 'Task ID', field: 'id', width: 150, hozAlign: 'center', headerFilter: 'input', editor: 'input' },
-        { title: 'Title', field: 'title', hozAlign: 'center', width: 300, headerFilter: 'input', editor: 'input' },
-        { title: 'Description', field: 'description', width: 650, hozAlign: 'center', headerFilter: 'input', editor: 'input' },
+        { title: 'Task ID', field: 'id', width: 150, hozAlign: 'left', headerFilter: 'input', editor: 'input' },
+        { title: 'Title', field: 'title', hozAlign: 'left', width: 300, headerFilter: 'input', editor: 'input' },
+        { title: 'Description', field: 'description', width: 650, hozAlign: 'left', headerFilter: 'input', editor: 'input' },
         { 
           title: 'Status', 
           field: 'status', 
           editor: 'list', 
           editorParams: { values: ['To Do', 'In Progress', 'Done'] }, 
-          hozAlign: 'center', 
+          hozAlign: 'left', 
           width: 250, 
           headerFilter: 'input' 
         },
