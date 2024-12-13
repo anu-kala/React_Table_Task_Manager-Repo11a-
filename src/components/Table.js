@@ -5,9 +5,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-
 const Table = () => {
   const tableRef = useRef(null); 
   const tabulatorInstance = useRef(null); 
@@ -34,7 +31,7 @@ const Table = () => {
       pagination: 'local',
       paginationSize: 20,
       columns: [
-        { title: 'Task ID', field: 'id', width: 150, hozAlign: 'center', headerFilter: 'input', editor: 'input',cssClass: 'bold-task-id' },
+        { title: 'Task ID', field: 'id', width: 150, hozAlign: 'center', headerFilter: 'input', editor: 'input' },
         { title: 'Title', field: 'title', hozAlign: 'center', width: 300, headerFilter: 'input', editor: 'input' },
         { title: 'Description', field: 'description', width: 650, hozAlign: 'center', headerFilter: 'input', editor: 'input' },
         { 
@@ -53,16 +50,16 @@ const Table = () => {
           hozAlign: 'center',
           headerSort: false,
           cellClick: (e, cell) => {
-            cell.getRow().delete(); 
-            saveTableData(); 
+            const rowId = cell.getRow().getData().id;
+            cell.getRow().delete();
+            saveTableData();
             toast.success('Item deleted successfully!', {
               position: 'top-right',
-              autoClose: 3000, 
+              autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
-              progress: undefined,
             });
           },
         },
@@ -86,34 +83,39 @@ const Table = () => {
         tabulatorInstance.current.destroy();
       }
     };
-  },
-  
-  
-[]);
+  }, []);
 
   // Add a new row to the table
   const handleAddRow = () => {
+    // Retrieve the last used ID from localStorage, or set it to 200 if not present
+    const lastUsedID = parseInt(localStorage.getItem('lastUsedID')) || 200;
+    
+    // Increment the last used ID by 1
+    const newId = lastUsedID + 1;
+
+    // Save the updated last used ID in localStorage
+    localStorage.setItem('lastUsedID', newId);
+
     const newRowData = {
-      id: Math.floor(Math.random() * 1000000), 
+      id: newId, // Set the new row's ID
       title: 'New Task',
       description: 'Enter description here',
       status: 'To Do',
     };
-    
-    tabulatorInstance.current.addData([newRowData], false) 
+
+    tabulatorInstance.current.addData([newRowData], false)
       .then(() => {
-        tabulatorInstance.current.setPage(tabulatorInstance.current.getPageMax()); 
-        saveTableData(); 
+        tabulatorInstance.current.setPage(tabulatorInstance.current.getPageMax());
+        saveTableData();
       })
       .catch(error => console.error('Error adding row:', error));
   };
 
   // Save the entire table's data to localStorage
   const saveTableData = () => {
-    const data = tabulatorInstance.current.getData(); 
-    localStorage.setItem('tableData', JSON.stringify(data)); 
+    const data = tabulatorInstance.current.getData();
+    localStorage.setItem('tableData', JSON.stringify(data));
   };
-  
 
   /**
    * Merges the API data with the saved local updates.
@@ -132,25 +134,20 @@ const Table = () => {
     const newRows = savedData.filter(localRow => !apiData.some(apiRow => apiRow.id === localRow.id));
     return [...mergedData, ...newRows];
   };
-  
-  
+
   return (
     <div>
       <h5 className="table-heading text-center taskHeading">TASK MANAGEMENT TABLE</h5>
       <div ref={tableRef} id="example-table"></div>
       <div>
-      <button id="add-row" onClick={handleAddRow} className="add-row-btn">
+        <button id="add-row" onClick={handleAddRow} className="add-row-btn">
           <i className="fas fa-plus" style={{ marginRight: '8px' }}></i> 
           Add a Row
         </button>
       </div>
       <ToastContainer />
-
     </div>
   );
 };
-
-
-
 
 export default Table;
