@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400;500&display=swap');
+body {
+    font-family: 'Poppins', sans-serif !important; 
+  }
+  
+
+/* Tabulator Header and Column Styling */
+.tabulator .tabulator-header .tabulator-col, 
+#example-table .tabulator-col {
+    text-align: center !important; 
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif !important; 
+}
+
+#example-table .tabulator-col {
+    background-color: #1f2937; 
+    color: rgb(36, 196, 36); 
+    border-right: 1px solid #6b7280; 
+    padding: 2px 1px; 
+    font-size: 16px; 
+    border-radius: 4px 4px 0 0;
+}
+
+#example-table .tabulator-col:hover {
+    background-color: #374151; 
+    color: #f3f4f6;
+}
+
+#example-table .tabulator-header {
+    border-bottom: 3px solid #6b7280; 
+    background-color: #111827; 
+    color: #f3f4f6;
+    font-size: 12px; 
+    text-transform: uppercase;
+    padding: 8px 0;
+}
+
+/* Tabulator Table Styling */
+.tabulator {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tabulator .tabulator-row {
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+.tabulator .tabulator-row:nth-child(even) {
+    background-color: #f4f6f9;
+}
+
+.tabulator .tabulator-row:hover {
+    background-color: #e6f7ff;
+}
+
+.tabulator .tabulator-cell {
+    text-align: center;
+    font-size: 16px;
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    #add-row {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .tabulator .tabulator-cell {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .delete-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Button Styling */
+#add-row {
+    margin-left: 40px;
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    background-color:rgb(36, 196, 36);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#add-row:hover {
+    background-color: rgb(76, 171, 76);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#add-row:active {
+    background-color:rgb(29, 164, 29);
+    transform: translateY(2px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+#add-row:focus {
+    /* outline: 2px solid #0056b3; */
+    outline-offset: 4px;
+}
+
+
+
+
+
+/* Delete Button Styling */
+.delete-btn {
+    background-color: rgb(36, 196, 36) !important;
+    color: black !important;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Table Action Row Styling */
+.tabulator .tabulator-footer {
+    background-color: rgb(36, 196, 36) !important;
+}
+
+.tabulator-paginator button {
+    background-color: #374151 !important;
+    color: #e0e0e0 !important;
+    height: 20px !important;
+    font-size: 10px !important;
+}
+
+/* Table and Button Container */
+#example-table, .btn-container {
+    margin: auto;
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+/* Ensure the table container has overflow styles */
+.tabulator-tableHolder {
+    overflow: auto !important; /* Force scrollbars to appear */
+}
+
+input{
+    padding:0px !important;
+}
+
+/* Fade-in effect for each row */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .tabulator .tabulator-row {
+    animation: fadeIn 0.5s ease-in-out; 
+  }
+  /* Button Click Animation */
+#add-row:active {
+    transform: scale(0.95); 
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  /* Slide-out effect for deleted rows */
+@keyframes slideOut {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+  
+  .tabulator-row-deleting {
+    animation: slideOut 0.5s ease-in-out forwards;
+  }
+  /* Row Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-100%); }
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes bounceIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+  
+  .tabulator-row {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .tabulator-row-deleting {
+    animation: slideOut 0.5s ease-in-out forwards;
+  }
+  
+  .tabulator-row-added {
+    animation: bounceIn 0.6s ease-out;
+  }
+  
+  #example-table {
+    animation: slideIn 1s ease-in-out;
+  }
+  
+  .tabulator-row:hover {
+    background-color: #f3f4f6 !important;
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+  }
+  /* Custom Scrollbar */
+#example-table::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  #example-table::-webkit-scrollbar-thumb {
+    background-color: #36c636; 
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #example-table::-webkit-scrollbar-thumb:hover {
+    background-color: #1e7c1e; 
+  }
+  /* Header hover effect */
+.tabulator-header {
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  /* Hide scrollbars but allow scrolling */
+.tabulator-tableHolder {
+    overflow: auto !important; 
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer/Edge */
+  }
+  
+  .tabulator-tableHolder::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and newer browsers */
+  }
+  .taskHeading{
+    font-size: 30px; 
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(180deg, #36c436 50%, #111827 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .tabulator .tabulator-row {
+    background-color: #f9f9f9; /* Default row color */
+    transition: background-color 0.3s ease;
+  }
+  
+  .tabulator .tabulator-row:nth-child(even) {
+    background-color: #f3f6f3 /* Light blue for even rows */
+  }
+  
+  .tabulator .tabulator-row:hover {
+    background-color: #c3e6cb; /* Soft green on hover */
+  }
+  .tabulator-row .tabulator-cell {
+    border: 0.5px solid  #36c436 !important;
+  }
+  .bold-task-id{
+    font-weight: bolder !important;
+  }
